@@ -1,82 +1,169 @@
-import Head from 'next/head'
+import Head from "next/head";
+import { useQuery } from "react-query";
+import { getHomepageCT } from "../queries/queries";
 
 export default function Home() {
+  const {
+    status,
+    data: records,
+    error,
+    isFetching,
+    isSuccess,
+  } = useQuery("record", async () => await getHomepageCT());
+
+  console.log(records);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex-col items-center justify-center min-h-screen py-2">
       <Head>
-        <title>Create Next App</title>
+        <title>CT record </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+            <div class="overflow-hidden shadow-md sm:rounded-lg">
+              <table class="min-w-full">
+                <thead class="bg-gray-50 dark:bg-gray-700">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      Entry id
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      Patient ID
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      Protocol
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      Inpatient?
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      Height
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      Weight
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      kV(tube A)
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      kV(tube B)
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                     Contrast type
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      Contrast rate
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                    >
+                      Contrast volume
+                    </th>
+                    <th scope="col" class="relative py-3 px-6">
+                      <span class="sr-only">Edit</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {records.map((record) => (
+                    <tr class="bg-white dark:bg-gray-800">
+                      <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {record.count}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.PID}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.protocol}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.Inpatient && 
+                          <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                          </svg>
+                        }
+                        
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.Height}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.Weight}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.kV_A}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.kV_b}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.Type}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.rate}
+                      </td>
+                      <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {record.volume}
+                      </td>      
+                      <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                        <a
+                          href="#" //need to trigger onClick for viewing the record or amend
+                          class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline"
+                        >
+                          Edit
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
+      </div>
     </div>
-  )
+  );
 }
