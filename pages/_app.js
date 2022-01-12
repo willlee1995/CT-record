@@ -1,22 +1,19 @@
-import 'tailwindcss/tailwind.css'
-import {
-  QueryClientProvider,
-  QueryClient
-} from 'react-query';
-import Layout from '../components/layout';
+import "tailwindcss/tailwind.css";
+import { QueryClientProvider, QueryClient } from "react-query";
+import Layout from "../components/Layout";
 
-const queryClient = new QueryClient() 
+const queryClient = new QueryClient();
 
-function App ({Component, pageProps}) {
-  return ( 
+function App({ Component, pageProps }) {
+  return (
     <>
-      <QueryClientProvider client={queryClient} >
+      <QueryClientProvider client={queryClient}>
         <Layout>
-          <Component {...pageProps} /> 
+          <Component {...pageProps} />
         </Layout>
-      </QueryClientProvider >
+      </QueryClientProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
