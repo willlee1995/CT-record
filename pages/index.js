@@ -4,6 +4,7 @@ import { getHomepageCT, getHomepageProtocol } from "../queries/queries";
 import Table from "../components/Table";
 import Dropdown from "../components/Dropdown";
 import { useState } from "react";
+import TableMaterial from "../components/TableMaterial";
 
 export default function Home() {
   const [selectedProtocols, setSelectedProtocols] = useState([]);
@@ -32,7 +33,8 @@ export default function Home() {
         getSelectedProtocols={getSelectedProtocols}
         selectedProtocols={selectedProtocols}
       />
-      <Table records={records} isSuccess={isSuccess} />
+
+      <TableMaterial records={records} isSuccess={isSuccess} />
     </div>
   );
 }
